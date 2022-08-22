@@ -1,9 +1,5 @@
-# elec_mech_beam
-![CI](https://github.com/THREAD-3-2/elec_mech_beam/workflows/CI/badge.svg)
-[![documentation](https://img.shields.io/badge/docs-passing-<COLOR>.svg)](https://THREAD-3-2.github.io/elec_mech_beam/)
+# 1D_wave_equation
 
-An electromechanically coupled beam model for dielectric elastomer actuators.
-
-Geometrically exact beam, spatially semidiscretized by 1D finite elements and then solved via variational time integration.
+A variational description of the 1-dimensional wave equation.
 
 Matlab code.
