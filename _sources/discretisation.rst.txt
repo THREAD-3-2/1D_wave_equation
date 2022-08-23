@@ -61,7 +61,7 @@ To implement these, it is important to understand the meaning of the derivatives
          D_4 L^{i,j}_d &= \frac{\Delta t}{2} p_s^{i+1,j+1} + \frac{\Delta s}{2} p_t^{i+1,j+1}\\
      \end{aligned}
 
-.. figure:: /figures/momenta.pdf
+.. figure:: /figures/momenta.png
 
    Figure 2. Representation of the momenta in the space-time domain
 
