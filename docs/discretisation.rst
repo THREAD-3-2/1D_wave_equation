@@ -6,7 +6,9 @@
 
 The space-time domain :math:`X` is discretised as a rectangular grid :math:`X_d` with :math:`N` steps of length :math:`\Delta s` in space and :math:`K` steps of length :math:`\Delta t` in time.
 
-.. image:: /figures/spacetime_grid.pdf
+.. figure:: /figures/spacetime_grid.png
+
+   Figure 1. Discretised space-time domain with the representation of transverse deformations and discrete Lagrangians
 
 The field is, thus, discretised by an indexed collection :math:`u_d = \{ u_{i,j} \in \mathbb{R} \;\vert\; i = 0, \dots, N,\, j = 0, \dots, K\}`.
 For each rectangular element with nodes :math:`\square_{i,j} = \{ (i,j), (i+1, j), (i, j+1), (i+1, j+1)\}`, we have a discrete Lagrangian :math:`L_d \,:\, \square_{i,j} \to \mathbb{R}`, :math:`L_d \left(u_{i,j},u_{i+1,j},u_{i,j+1},u_{i+1,j+1} \right)`, abbreviated as :math:`L^{i,j}_d`.
@@ -40,9 +42,9 @@ The resulting discrete Euler-Lagrange equations at node :math:`(i,j)` are:
 
 Notice that these involve the discrete Lagrangians of all the rectangles containing :math:`(i,j)`.
 
-.. figure::  /figures/del_grid.pdf
+.. figure::  /figures/del_grid.png
 
-   Figure 1. Discretised space-time domain with the representation of transverse deformations and discrete Lagrangians
+   Figure 3. Discrete Lagrangian in the space-time domain
 
 Boundary conditions
 ===================
