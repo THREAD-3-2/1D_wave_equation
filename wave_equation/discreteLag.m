@@ -2,11 +2,10 @@ function [Ld_ij,Ld_i0j,Ld_ij0,Ld_i0j0] = discreteLag(L,delta_s,delta_t,dsu,dtu)
 % Discretizaion of the Lagrangian: the trapezoidal quadrature rule is used
 % in time and space.
 
-%---------------------------
 % i  --> space node i    j  --> time step j 
 % i1 --> space node i+1  j1 --> time step j+1
 % i0 --> space node i-1  j0 --> time step j-1
-%---------------------------
+
 syms u_ij u_i1j u_ij1 u_i1j1
 syms u_i0j u_i0j1  u_ij0 u_i1j0  u_i0j0
 

@@ -1,12 +1,10 @@
 % Variational formulation of the 1D wave equation.
 %
-%---------------------------
 % :parameters: initial conditions, boundary conditions, material parameter
 %
 % :returns: discrete trajectory of the beam
 %
 % :post-processing: energy density, momentum density, energy charge
-%--------------------------- 
 
 clc
 format short
