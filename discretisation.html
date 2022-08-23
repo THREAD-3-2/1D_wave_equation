@@ -38,7 +38,12 @@
   <section id="space-time-discretisation">
 <span id="discretization"></span><h1>Space-time discretisation<a class="headerlink" href="#space-time-discretisation" title="Permalink to this heading">¶</a></h1>
 <p>The space-time domain <span class="math notranslate nohighlight">\(X\)</span> is discretised as a rectangular grid <span class="math notranslate nohighlight">\(X_d\)</span> with <span class="math notranslate nohighlight">\(N\)</span> steps of length <span class="math notranslate nohighlight">\(\Delta s\)</span> in space and <span class="math notranslate nohighlight">\(K\)</span> steps of length <span class="math notranslate nohighlight">\(\Delta t\)</span> in time.</p>
-<img alt="_images/spacetime_grid.pdf" src="_images/spacetime_grid.pdf" />
+<figure class="align-default" id="id1">
+<img alt="_images/spacetime_grid.png" src="_images/spacetime_grid.png" />
+<figcaption>
+<p><span class="caption-text">Figure 1. Discretised space-time domain with the representation of transverse deformations and discrete Lagrangians</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
 <p>The field is, thus, discretised by an indexed collection <span class="math notranslate nohighlight">\(u_d = \{ u_{i,j} \in \mathbb{R} \;\vert\; i = 0, \dots, N,\, j = 0, \dots, K\}\)</span>.
 For each rectangular element with nodes <span class="math notranslate nohighlight">\(\square_{i,j} = \{ (i,j), (i+1, j), (i, j+1), (i+1, j+1)\}\)</span>, we have a discrete Lagrangian <span class="math notranslate nohighlight">\(L_d \,:\, \square_{i,j} \to \mathbb{R}\)</span>, <span class="math notranslate nohighlight">\(L_d \left(u_{i,j},u_{i+1,j},u_{i,j+1},u_{i+1,j+1} \right)\)</span>, abbreviated as <span class="math notranslate nohighlight">\(L^{i,j}_d\)</span>.</p>
 <p>The trapezoidal quadrature rule is used to approximate the continuous action over each rectangle <span class="math notranslate nohighlight">\(\square_{i,j}\)</span>.
@@ -65,10 +70,10 @@ The resulting discrete Euler-Lagrange equations at node <span class="math notran
 \end{aligned}\]</div>
 </div></blockquote>
 <p>Notice that these involve the discrete Lagrangians of all the rectangles containing <span class="math notranslate nohighlight">\((i,j)\)</span>.</p>
-<figure class="align-default" id="id1">
-<img alt="_images/del_grid.pdf" src="_images/del_grid.pdf" />
+<figure class="align-default" id="id2">
+<img alt="_images/del_grid.png" src="_images/del_grid.png" />
 <figcaption>
-<p><span class="caption-text">Figure 1. Discretised space-time domain with the representation of transverse deformations and discrete Lagrangians</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text">Figure 3. Discrete Lagrangian in the space-time domain</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </figcaption>
 </figure>
 <section id="boundary-conditions">
@@ -82,10 +87,10 @@ The resulting discrete Euler-Lagrange equations at node <span class="math notran
     D_3 L^{i,j}_d &amp;= -\frac{\Delta t}{2} p_s^{i,j+1} + \frac{\Delta s}{2} p_t^{i,j+1}\\
     D_4 L^{i,j}_d &amp;= \frac{\Delta t}{2} p_s^{i+1,j+1} + \frac{\Delta s}{2} p_t^{i+1,j+1}\\
 \end{aligned}\end{split}\]</div>
-<figure class="align-default" id="id2">
+<figure class="align-default" id="id3">
 <img alt="_images/momenta.pdf" src="_images/momenta.pdf" />
 <figcaption>
-<p><span class="caption-text">Figure 2. Representation of the momenta in the space-time domain</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text">Figure 2. Representation of the momenta in the space-time domain</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </figcaption>
 </figure>
 <p>Currently, the following conditions are hardcoded:</p>
