@@ -1,6 +1,12 @@
 function [pp_s] = eval_pps(Ld_ij,Ld_i0j,Ld_ij0,Ld_i0j0,u_ij,u_ij1,u_ij0,u_i1j1,u_i1j,u_i0j,u_i0j1,uu,delta_t,n_t,n_s)
 % Legendre transform.
 %
+% :param u_ij: discrete transverse deformations over the space-time grid, space and time steps
+% :param Ld_ij: discrete Lagrangians over the space-time grid
+% :param delta_t,n_t,n_s: time step size, and number of time and space steps
+%
+% :returns: pp_s canonical momenta w.r.t. space evaluated at each node of the space-time grid
+%
 p_s_backward = -(diff(Ld_ij,u_ij)+diff(Ld_ij0,u_ij))/delta_t;
 p_s_forward  = (diff(Ld_i0j,u_ij)+diff(Ld_i0j0,u_ij))/delta_t;
 

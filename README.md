@@ -1,5 +1,5 @@
 # 1D_wave_equation
-![CI](https://github.com/THREAD-3-2/lie_group_time_integrator/workflows/CI/badge.svg)
+![CI](https://github.com/THREAD-3-2/1D_wave_equation/workflows/CI/badge.svg)
 [![documentation](https://img.shields.io/badge/docs-passing-<COLOR>.svg)](https://THREAD-3-2.github.io/1D_wave_equation/)
 
 

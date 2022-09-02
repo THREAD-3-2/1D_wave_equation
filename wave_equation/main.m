@@ -1,10 +1,12 @@
 % Variational formulation of the 1D wave equation.
 %
-% :parameters: initial conditions, boundary conditions, material parameter
+% :param u_t0, dtu_t0: initial conditions
+% :param u_s0, u_sl: boundary conditions
+% :param l, rho, k_pot: string length, density and stiffness
 %
-% :returns: discrete trajectory of the beam
+% :returns: discrete transverse deformations u
+% :postprocessing: HH energy density, PP momentum density and HH_error error in time of the energy charge
 %
-% :post-processing: energy density, momentum density, energy charge
 
 clc
 format short
@@ -14,7 +16,7 @@ t_end = 1;
 rho = 1;    % string density
 k_pot  = 1; % string stiffness
 
-% space-time discretization
+% space-time discretisation
 ns_elem = 100; 
 n_s = ns_elem+1;
 delta_s = l/ns_elem;

@@ -7,7 +7,7 @@
 Description of the problem
 ==========================
 
-The transverse deformation :math:`u = u(s,t)` of the string is a function
+The transverse deformation :math:`u = u(x,t)` of the string is a function
 defined in the space-time domain :math:`X = [0,l] \times [0,\tau]` to the configuration space :math:`Q = \mathbb{R}`. Here :math:`l, \tau \in \mathbb{R}` denote the length of the string and the total simulation time respectively. Its Lagrangian density can be written as:
 
 .. math::
@@ -22,7 +22,7 @@ The associated action functional is:
 
 .. math::
         \begin{aligned}
-      	 		S[u]=\int_{0}^{\tau} {\int_{0}^{l} L(u(s,t),\dot{u}(s,t),u'(s,t)) ds}dt
+      	 		S[u]=\int_{0}^{\tau} {\int_{0}^{l} L(u(x,t),\dot{u}(x,t),u'(x,t)) dx}dt
       	\end{aligned}
 
 Applying Hamilton's principle of stationary action with fixed variations at the boundary of :math:`X` yields the Euler-Lagrange equations of the string, the 1D wave equation:
@@ -42,7 +42,7 @@ As in standard Lagrangian mechanics, in Lagrangian field theories there exists t
 .. math::
         \begin{align*}
       	   &p_t = \frac{\partial L}{\partial \dot{u}}(u,\dot{u},u') = \dot{u},\\
-      	   &p_s = \frac{\partial L}{\partial u'}(u,\dot{u},u') = -c^2 u'.
+      	   &p_x = \frac{\partial L}{\partial u'}(u,\dot{u},u') = -c^2 u'.
       	\end{align*}
 
 These will be important in order to impose the boundary conditions after the discretisation.

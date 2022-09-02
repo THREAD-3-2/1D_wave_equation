@@ -4,8 +4,9 @@
  MATLAB code
 =============
 
-This primitive example just shows how to document MATLAB code with Sphinx
-using the `matlabdomain extension <https://github.com/sphinx-contrib/matlabdomain/blob/master/README.rst>`_.
+1D_wave_equation is a MATLAB code for the dynamics of a 1-dimensional wave equation. The trapezoidal quadrature rule is used to approximate the integral of
+the Lagrangian function in both time and space. Symbolic differentiation is used for the derivation of the equations and this leads to long time running.
+Matlab Symbolic Math Toolbox is needed.
 
 wave_equation
 =============
@@ -18,17 +19,16 @@ wave_equation
 
 The discrete Lagrangian is defined in:
 
-.. mat:autoscript:: wave_equation.discreteLag
+.. mat:autofunction:: wave_equation.discreteLag
 
 The discrete Euler-Lagrange equations are solved in time and space in:
 
-.. mat:autoscript:: wave_equation.timesolver
+.. mat:autofunction:: wave_equation.timesolver
 
 The conjugate momenta in time is evaluated in:
 
-.. mat:autoscript:: wave_equation.eval_ppt
-
+.. mat:autofunction:: wave_equation.eval_ppt
 
 The conjugate momenta in space is evaluated in:
 
-.. mat:autoscript:: wave_equation.eval_pps
+.. mat:autofunction:: wave_equation.eval_pps
