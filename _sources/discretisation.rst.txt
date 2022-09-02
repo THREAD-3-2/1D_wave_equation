@@ -4,7 +4,7 @@
  Space-time discretisation
 ===============================
 
-The space-time domain :math:`X` is discretised as a rectangular grid :math:`X_d` with :math:`N` steps of length :math:`\Delta s` in space and :math:`K` steps of length :math:`\Delta t` in time.
+The space-time domain :math:`X` is discretised as a rectangular grid :math:`X_d` with :math:`N` steps of length :math:`\Delta x` in space and :math:`K` steps of length :math:`\Delta t` in time.
 
 .. figure:: /figures/spacetime_grid.png
 
@@ -18,10 +18,10 @@ Then:
 
 .. math::
       \begin{aligned}
-        L^{i,j}_d = \frac{\Delta s \Delta t}{4} \left\{ \left( \frac{u_{i,j+1}-u_{i,j}}{\Delta t} \right)^2 +
+        L^{i,j}_d = \frac{\Delta x \Delta t}{4} \left\{ \left( \frac{u_{i,j+1}-u_{i,j}}{\Delta t} \right)^2 +
         \left( \frac{u_{i+1,j+1}-u_{i+1,j}}{\Delta t} \right)^2
-        - c^2 \left[ \left( \frac{u_{i+1,j}-u_{i,j}}{\Delta s} \right)^2 +
-         \left( \frac{u_{i+1,j+1}-u_{i,j+1}}{\Delta s} \right)^2 \right] \right\}
+        - c^2 \left[ \left( \frac{u_{i+1,j}-u_{i,j}}{\Delta x} \right)^2 +
+         \left( \frac{u_{i+1,j+1}-u_{i,j+1}}{\Delta x} \right)^2 \right] \right\}
       \end{aligned}
 
 The associated discrete action is:
@@ -55,10 +55,10 @@ To implement these, it is important to understand the meaning of the derivatives
 
 .. math::
      \begin{aligned}
-         D_1 L^{i,j}_d &= -\frac{\Delta t}{2} p_s^{i,j} - \frac{\Delta s}{2} p_t^{i,j}\\
-         D_2 L^{i,j}_d &= \frac{\Delta t}{2} p_s^{i+1,j} - \frac{\Delta s}{2} p_t^{i+1,j}\\
-         D_3 L^{i,j}_d &= -\frac{\Delta t}{2} p_s^{i,j+1} + \frac{\Delta s}{2} p_t^{i,j+1}\\
-         D_4 L^{i,j}_d &= \frac{\Delta t}{2} p_s^{i+1,j+1} + \frac{\Delta s}{2} p_t^{i+1,j+1}\\
+         D_1 L^{i,j}_d &= -\frac{\Delta t}{2} p_x^{i,j} - \frac{\Delta x}{2} p_t^{i,j}\\
+         D_2 L^{i,j}_d &= \frac{\Delta t}{2} p_x^{i+1,j} - \frac{\Delta x}{2} p_t^{i+1,j}\\
+         D_3 L^{i,j}_d &= -\frac{\Delta t}{2} p_x^{i,j+1} + \frac{\Delta x}{2} p_t^{i,j+1}\\
+         D_4 L^{i,j}_d &= \frac{\Delta t}{2} p_x^{i+1,j+1} + \frac{\Delta x}{2} p_t^{i+1,j+1}\\
      \end{aligned}
 
 .. figure:: /figures/momenta.png
@@ -75,7 +75,7 @@ Currently, the following conditions are hardcoded:
          u(l,t) &= 0
      \end{aligned}
 
-To implement the first, all nodes :math:`u_{i,0}` have been fixed to their corresponding values, :math:`\sin(\pi i \Delta s)`, and for the latter two, :math:`u_{0,j}` and :math:`u_{N,j}` have been set to zero. To implement the second, we make use of the above interpretation to write and solve the equations,
+To implement the first, all nodes :math:`u_{i,0}` have been fixed to their corresponding values, :math:`\sin(\pi i \Delta x)`, and for the latter two, :math:`u_{0,j}` and :math:`u_{N,j}` have been set to zero. To implement the second, we make use of the above interpretation to write and solve the equations,
 
 .. math::
       \begin{aligned}

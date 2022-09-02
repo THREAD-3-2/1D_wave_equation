@@ -39,7 +39,7 @@
 <span id="id1"></span><h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a></h1>
 <section id="description-of-the-problem">
 <h2>Description of the problem<a class="headerlink" href="#description-of-the-problem" title="Permalink to this heading">¶</a></h2>
-<p>The transverse deformation <span class="math notranslate nohighlight">\(u = u(s,t)\)</span> of the string is a function
+<p>The transverse deformation <span class="math notranslate nohighlight">\(u = u(x,t)\)</span> of the string is a function
 defined in the space-time domain <span class="math notranslate nohighlight">\(X = [0,l] \times [0,\tau]\)</span> to the configuration space <span class="math notranslate nohighlight">\(Q = \mathbb{R}\)</span>. Here <span class="math notranslate nohighlight">\(l, \tau \in \mathbb{R}\)</span> denote the length of the string and the total simulation time respectively. Its Lagrangian density can be written as:</p>
 <div class="math notranslate nohighlight">
 \[\begin{aligned}
@@ -51,7 +51,7 @@ w.r.t. space, and <span class="math notranslate nohighlight">\(c\)</span> is the
 The associated action functional is:</p>
 <div class="math notranslate nohighlight">
 \[\begin{aligned}
-                S[u]=\int_{0}^{\tau} {\int_{0}^{l} L(u(s,t),\dot{u}(s,t),u'(s,t)) ds}dt
+                S[u]=\int_{0}^{\tau} {\int_{0}^{l} L(u(x,t),\dot{u}(x,t),u'(x,t)) dx}dt
 \end{aligned}\]</div>
 <p>Applying Hamilton’s principle of stationary action with fixed variations at the boundary of <span class="math notranslate nohighlight">\(X\)</span> yields the Euler-Lagrange equations of the string, the 1D wave equation:</p>
 <div class="math notranslate nohighlight">
@@ -66,7 +66,7 @@ The associated action functional is:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align*}
    &amp;p_t = \frac{\partial L}{\partial \dot{u}}(u,\dot{u},u') = \dot{u},\\
-   &amp;p_s = \frac{\partial L}{\partial u'}(u,\dot{u},u') = -c^2 u'.
+   &amp;p_x = \frac{\partial L}{\partial u'}(u,\dot{u},u') = -c^2 u'.
 \end{align*}\end{split}\]</div>
 <p>These will be important in order to impose the boundary conditions after the discretisation.</p>
 </section>

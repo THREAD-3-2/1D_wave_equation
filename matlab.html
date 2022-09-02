@@ -35,8 +35,9 @@
             
   <section id="matlab-code">
 <span id="matlab"></span><h1>MATLAB code<a class="headerlink" href="#matlab-code" title="Permalink to this heading">¶</a></h1>
-<p>This primitive example just shows how to document MATLAB code with Sphinx
-using the <a class="reference external" href="https://github.com/sphinx-contrib/matlabdomain/blob/master/README.rst">matlabdomain extension</a>.</p>
+<p>1D_wave_equation is a MATLAB code for the dynamics of a 1-dimensional wave equation. The trapezoidal quadrature rule is used to approximate the integral of
+the Lagrangian function in both time and space. Symbolic differentiation is used for the derivation of the equations and this leads to long time running.
+Matlab Symbolic Math Toolbox is needed.</p>
 <section id="module-wave_equation">
 <span id="wave-equation"></span><h2>wave_equation<a class="headerlink" href="#module-wave_equation" title="Permalink to this heading">¶</a></h2>
 <p><code class="xref py py-mod docutils literal notranslate"><span class="pre">wave_equation</span></code> module contains the source code :</p>
@@ -46,44 +47,95 @@ using the <a class="reference external" href="https://github.com/sphinx-contrib/
 <dd><p>Variational formulation of the 1D wave equation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p>initial conditions, boundary conditions, material parameter</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dtu_t0</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">u_t0,</span></code></span>) – initial conditions</p></li>
+<li><p><strong>u_sl</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">u_s0,</span></code></span>) – boundary conditions</p></li>
+<li><p><strong>k_pot</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">l,</span> <span class="pre">rho,</span></code></span>) – string length, density and stiffness</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>discrete trajectory of the beam</p>
+<dd class="field-even"><p>discrete transverse deformations u</p>
 </dd>
-<dt class="field-odd">Post-processing<span class="colon">:</span></dt>
-<dd class="field-odd"><p>energy density, momentum density, energy charge</p>
+<dt class="field-odd">Postprocessing<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HH energy density, PP momentum density and HH_error error in time of the energy charge</p>
 </dd>
 </dl>
 </dd></dl>
 
 <p>The discrete Lagrangian is defined in:</p>
-<dl class="mat script">
+<dl class="mat function">
 <dt class="sig sig-object mat" id="wave_equation.discreteLag">
-<span class="sig-prename descclassname"><span class="pre">wave_equation.</span></span><span class="sig-name descname"><span class="pre">discreteLag</span></span><a class="headerlink" href="#wave_equation.discreteLag" title="Permalink to this definition">¶</a></dt>
-<dd><p>Discretizaion of the Lagrangian: the trapezoidal quadrature rule is used
+<span class="sig-prename descclassname"><span class="pre">wave_equation.</span></span><span class="sig-name descname"><span class="pre">discreteLag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">L</span></em>, <em class="sig-param"><span class="pre">delta_s</span></em>, <em class="sig-param"><span class="pre">delta_t</span></em>, <em class="sig-param"><span class="pre">dsu</span></em>, <em class="sig-param"><span class="pre">dtu</span></em><span class="sig-paren">)</span><a class="headerlink" href="#wave_equation.discreteLag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Discretisation of the Lagrangian: the trapezoidal quadrature rule is used
 in time and space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>L</strong> – Lagrangian function</p></li>
+<li><p><strong>delta_s,delta_t</strong> – space and time steps</p></li>
+<li><p><strong>dsu,dtu</strong> – derivative of u respect to space and time</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Ld_ij discrete Lagrangian at each node of the space-time grid</p>
+</dd>
+</dl>
 </dd></dl>
 
 <p>The discrete Euler-Lagrange equations are solved in time and space in:</p>
-<dl class="mat script">
+<dl class="mat function">
 <dt class="sig sig-object mat" id="wave_equation.timesolver">
-<span class="sig-prename descclassname"><span class="pre">wave_equation.</span></span><span class="sig-name descname"><span class="pre">timesolver</span></span><a class="headerlink" href="#wave_equation.timesolver" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">wave_equation.</span></span><span class="sig-name descname"><span class="pre">timesolver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">uu_ij1_DEL</span></em>, <em class="sig-param"><span class="pre">u_ij</span></em>, <em class="sig-param"><span class="pre">u_i0j</span></em>, <em class="sig-param"><span class="pre">u_i1j</span></em>, <em class="sig-param"><span class="pre">u_ij0</span></em>, <em class="sig-param"><span class="pre">uu</span></em>, <em class="sig-param"><span class="pre">n_t</span></em>, <em class="sig-param"><span class="pre">n_s</span></em><span class="sig-paren">)</span><a class="headerlink" href="#wave_equation.timesolver" title="Permalink to this definition">¶</a></dt>
 <dd><p>Time solver of the discrete Euler-Lagrange equations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>u_ij</strong> – discrete transverse deformations</p></li>
+<li><p><strong>n_t,n_s</strong> – number of time and space steps</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>uu discrete transverse deformations at the interior points of the space-time grid (solution of the discrete Euler-Lagrange equations)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <p>The conjugate momenta in time is evaluated in:</p>
-<dl class="mat script">
+<dl class="mat function">
 <dt class="sig sig-object mat" id="wave_equation.eval_ppt">
-<span class="sig-prename descclassname"><span class="pre">wave_equation.</span></span><span class="sig-name descname"><span class="pre">eval_ppt</span></span><a class="headerlink" href="#wave_equation.eval_ppt" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">wave_equation.</span></span><span class="sig-name descname"><span class="pre">eval_ppt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">Ld_ij</span></em>, <em class="sig-param"><span class="pre">Ld_i0j</span></em>, <em class="sig-param"><span class="pre">Ld_ij0</span></em>, <em class="sig-param"><span class="pre">Ld_i0j0</span></em>, <em class="sig-param"><span class="pre">u_ij</span></em>, <em class="sig-param"><span class="pre">u_i0j</span></em>, <em class="sig-param"><span class="pre">u_i1j</span></em>, <em class="sig-param"><span class="pre">u_ij1</span></em>, <em class="sig-param"><span class="pre">u_ij0</span></em>, <em class="sig-param"><span class="pre">uu</span></em>, <em class="sig-param"><span class="pre">delta_s</span></em>, <em class="sig-param"><span class="pre">n_t</span></em>, <em class="sig-param"><span class="pre">n_s</span></em><span class="sig-paren">)</span><a class="headerlink" href="#wave_equation.eval_ppt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Legendre transform.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>u_ij</strong> – discrete transverse deformations over the space-time grid, space and time steps</p></li>
+<li><p><strong>Ld_ij</strong> – discrete Lagrangians over the space-time grid</p></li>
+<li><p><strong>delta_t,n_t,n_s</strong> – time step size, and number of time and space steps</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>pp_t canonical momenta w.r.t. time evaluated at each node of the space-time grid</p>
+</dd>
+</dl>
 </dd></dl>
 
 <p>The conjugate momenta in space is evaluated in:</p>
-<dl class="mat script">
+<dl class="mat function">
 <dt class="sig sig-object mat" id="wave_equation.eval_pps">
-<span class="sig-prename descclassname"><span class="pre">wave_equation.</span></span><span class="sig-name descname"><span class="pre">eval_pps</span></span><a class="headerlink" href="#wave_equation.eval_pps" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">wave_equation.</span></span><span class="sig-name descname"><span class="pre">eval_pps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">Ld_ij</span></em>, <em class="sig-param"><span class="pre">Ld_i0j</span></em>, <em class="sig-param"><span class="pre">Ld_ij0</span></em>, <em class="sig-param"><span class="pre">Ld_i0j0</span></em>, <em class="sig-param"><span class="pre">u_ij</span></em>, <em class="sig-param"><span class="pre">u_ij1</span></em>, <em class="sig-param"><span class="pre">u_ij0</span></em>, <em class="sig-param"><span class="pre">u_i1j1</span></em>, <em class="sig-param"><span class="pre">u_i1j</span></em>, <em class="sig-param"><span class="pre">u_i0j</span></em>, <em class="sig-param"><span class="pre">u_i0j1</span></em>, <em class="sig-param"><span class="pre">uu</span></em>, <em class="sig-param"><span class="pre">delta_t</span></em>, <em class="sig-param"><span class="pre">n_t</span></em>, <em class="sig-param"><span class="pre">n_s</span></em><span class="sig-paren">)</span><a class="headerlink" href="#wave_equation.eval_pps" title="Permalink to this definition">¶</a></dt>
 <dd><p>Legendre transform.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>u_ij</strong> – discrete transverse deformations over the space-time grid, space and time steps</p></li>
+<li><p><strong>Ld_ij</strong> – discrete Lagrangians over the space-time grid</p></li>
+<li><p><strong>delta_t,n_t,n_s</strong> – time step size, and number of time and space steps</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>pp_s canonical momenta w.r.t. space evaluated at each node of the space-time grid</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>

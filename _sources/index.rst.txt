@@ -24,5 +24,4 @@ Indices and tables
 ==================
 
 * :ref:`genindex`
-* `Module Index <mat-modindex.html>`_
 * :ref:`search`

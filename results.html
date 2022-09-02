@@ -48,19 +48,42 @@
 <li><p>energy charge, i.e. the total energy of the system evaluated in the discretised simulation time</p>
 <div class="math notranslate nohighlight">
 \[\begin{aligned}
-    H_{charge} \left( t \right) = \int_{0}^\tau \left[ \frac{1}{2} \left( u' ^2 + c^2 \dot{u}^2 \right) dt \right]
+    H_{charge} \left( t \right) = \int_{0}^l \left[ \frac{1}{2} \left( u' ^2 + c^2 \dot{u}^2 \right) dx \right]
 \end{aligned}\]</div>
 </li>
 </ul>
 <p>Both quantities are calculated by using the discrete Legendre transform. In the discrete settings, energy density and charge are respectively detemined as follow:</p>
 <div class="math notranslate nohighlight">
 \[\begin{aligned}
-    H_{density}^{i,j} = \frac{1}{2} \left( (p_t^{i,j})^2 + c^2 (p_x^{i,j})^2 \right)
+    H_{density}^{i,j} = \frac{1}{2} \left( (p_t^{i,j})^2 + c^2 (p_x^{i,j})^2 \right) \; \; \text{for} \; i=0 \dots l \text{,} \; j=0 \dots \tau
 \end{aligned}\]</div>
 <div class="math notranslate nohighlight">
 \[\begin{aligned}
-    H_{charge}^j \left( t \right) = \sum\limits_{j=0}^\tau \left[ \frac{1}{2} \left( (p_t^{j})^2 + c^2 (p_x^{j})^2 \right) \right]
+    H_{charge}^j = \sum\limits_{i=0}^l \left[ \frac{1}{2} \left( (p_t^{i})^2 + c^2 (p_x^{i})^2 \right) \right] \; \text{for} \; j=0 \dots \tau
 \end{aligned}\]</div>
+<p>In the <a class="reference external" href="https://github.com/THREAD-3-2/1D_wave_equation/tree/main/wave_equation">1D_wave_equation</a>,
+the energy density is evaluated as follow:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">n_t</span>
+     <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">n_s</span>
+         <span class="n">T_kin</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">rho</span><span class="o">*</span><span class="n">pp_t</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="p">;</span>
+         <span class="n">V_pot</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">k_pot</span><span class="o">*</span><span class="n">pp_s</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="p">;</span>
+         <span class="n">HH</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">=</span> <span class="n">T_kin</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="o">+</span><span class="n">V_pot</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">);</span>
+         <span class="n">HH_charge_node</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">pp_t</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">k_pot</span><span class="o">/</span><span class="n">rho</span><span class="o">*</span><span class="n">pp_s</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="p">);</span>
+         <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+         <span class="n">HH_charge_elem</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">delta_s</span><span class="o">*</span><span class="p">(</span><span class="n">HH_charge_node</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="o">+</span><span class="n">HH_charge_node</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">));</span>
+         <span class="n">end</span>
+     <span class="n">end</span>
+ <span class="n">end</span>
+</pre></div>
+</div>
+<p>where n_t is the number of time steps, n_s is the number of nodes, T_kin is the kinetic energy, V_pot is the potential energy, rho is the density and
+k_pot is the modulus of elasticity of the string. Moreover, instead of computing the energy charge itself, in the Matlab code its error during simulation is evaluated.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">n_t</span>
+    <span class="n">HH_charge</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">HH_charge_elem</span><span class="p">(:,</span><span class="n">j</span><span class="p">));</span>
+    <span class="n">HH_error</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">=</span> <span class="n">HH_charge</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="n">HH_charge</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+<span class="n">end</span>
+</pre></div>
+</div>
 <p>For the particular example problem, the above quantities are shown in Figure 1 and 2. It can be notice the good behaviour of the energy charge with an error in time of the order of <span class="math notranslate nohighlight">\(10^{-15}\)</span> in Figure 2.</p>
 <figure class="align-default" id="id1">
 <img alt="_images/energy_density.png" src="_images/energy_density.png" />

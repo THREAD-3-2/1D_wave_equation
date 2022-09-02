@@ -37,7 +37,7 @@
             
   <section id="space-time-discretisation">
 <span id="discretization"></span><h1>Space-time discretisation<a class="headerlink" href="#space-time-discretisation" title="Permalink to this heading">¶</a></h1>
-<p>The space-time domain <span class="math notranslate nohighlight">\(X\)</span> is discretised as a rectangular grid <span class="math notranslate nohighlight">\(X_d\)</span> with <span class="math notranslate nohighlight">\(N\)</span> steps of length <span class="math notranslate nohighlight">\(\Delta s\)</span> in space and <span class="math notranslate nohighlight">\(K\)</span> steps of length <span class="math notranslate nohighlight">\(\Delta t\)</span> in time.</p>
+<p>The space-time domain <span class="math notranslate nohighlight">\(X\)</span> is discretised as a rectangular grid <span class="math notranslate nohighlight">\(X_d\)</span> with <span class="math notranslate nohighlight">\(N\)</span> steps of length <span class="math notranslate nohighlight">\(\Delta x\)</span> in space and <span class="math notranslate nohighlight">\(K\)</span> steps of length <span class="math notranslate nohighlight">\(\Delta t\)</span> in time.</p>
 <figure class="align-default" id="id1">
 <img alt="_images/spacetime_grid.png" src="_images/spacetime_grid.png" />
 <figcaption>
@@ -50,10 +50,10 @@ For each rectangular element with nodes <span class="math notranslate nohighligh
 Then:</p>
 <div class="math notranslate nohighlight">
 \[\begin{aligned}
-  L^{i,j}_d = \frac{\Delta s \Delta t}{4} \left\{ \left( \frac{u_{i,j+1}-u_{i,j}}{\Delta t} \right)^2 +
+  L^{i,j}_d = \frac{\Delta x \Delta t}{4} \left\{ \left( \frac{u_{i,j+1}-u_{i,j}}{\Delta t} \right)^2 +
   \left( \frac{u_{i+1,j+1}-u_{i+1,j}}{\Delta t} \right)^2
-  - c^2 \left[ \left( \frac{u_{i+1,j}-u_{i,j}}{\Delta s} \right)^2 +
-   \left( \frac{u_{i+1,j+1}-u_{i,j+1}}{\Delta s} \right)^2 \right] \right\}
+  - c^2 \left[ \left( \frac{u_{i+1,j}-u_{i,j}}{\Delta x} \right)^2 +
+   \left( \frac{u_{i+1,j+1}-u_{i,j+1}}{\Delta x} \right)^2 \right] \right\}
 \end{aligned}\]</div>
 <p>The associated discrete action is:</p>
 <div class="math notranslate nohighlight">
@@ -82,10 +82,10 @@ The resulting discrete Euler-Lagrange equations at node <span class="math notran
 <p>To implement these, it is important to understand the meaning of the derivatives <span class="math notranslate nohighlight">\(D_k L^{i,j}_d\)</span>, <span class="math notranslate nohighlight">\(k = 1, \dots, 4\)</span> and their relation to the canonical momenta, see the picture below. In our case, these derivatives can be interpreted as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
-    D_1 L^{i,j}_d &amp;= -\frac{\Delta t}{2} p_s^{i,j} - \frac{\Delta s}{2} p_t^{i,j}\\
-    D_2 L^{i,j}_d &amp;= \frac{\Delta t}{2} p_s^{i+1,j} - \frac{\Delta s}{2} p_t^{i+1,j}\\
-    D_3 L^{i,j}_d &amp;= -\frac{\Delta t}{2} p_s^{i,j+1} + \frac{\Delta s}{2} p_t^{i,j+1}\\
-    D_4 L^{i,j}_d &amp;= \frac{\Delta t}{2} p_s^{i+1,j+1} + \frac{\Delta s}{2} p_t^{i+1,j+1}\\
+    D_1 L^{i,j}_d &amp;= -\frac{\Delta t}{2} p_x^{i,j} - \frac{\Delta x}{2} p_t^{i,j}\\
+    D_2 L^{i,j}_d &amp;= \frac{\Delta t}{2} p_x^{i+1,j} - \frac{\Delta x}{2} p_t^{i+1,j}\\
+    D_3 L^{i,j}_d &amp;= -\frac{\Delta t}{2} p_x^{i,j+1} + \frac{\Delta x}{2} p_t^{i,j+1}\\
+    D_4 L^{i,j}_d &amp;= \frac{\Delta t}{2} p_x^{i+1,j+1} + \frac{\Delta x}{2} p_t^{i+1,j+1}\\
 \end{aligned}\end{split}\]</div>
 <figure class="align-default" id="id3">
 <img alt="_images/momenta.png" src="_images/momenta.png" />
@@ -101,7 +101,7 @@ The resulting discrete Euler-Lagrange equations at node <span class="math notran
     u(0,t) &amp;= 0\\
     u(l,t) &amp;= 0
 \end{aligned}\end{split}\]</div>
-<p>To implement the first, all nodes <span class="math notranslate nohighlight">\(u_{i,0}\)</span> have been fixed to their corresponding values, <span class="math notranslate nohighlight">\(\sin(\pi i \Delta s)\)</span>, and for the latter two, <span class="math notranslate nohighlight">\(u_{0,j}\)</span> and <span class="math notranslate nohighlight">\(u_{N,j}\)</span> have been set to zero. To implement the second, we make use of the above interpretation to write and solve the equations,</p>
+<p>To implement the first, all nodes <span class="math notranslate nohighlight">\(u_{i,0}\)</span> have been fixed to their corresponding values, <span class="math notranslate nohighlight">\(\sin(\pi i \Delta x)\)</span>, and for the latter two, <span class="math notranslate nohighlight">\(u_{0,j}\)</span> and <span class="math notranslate nohighlight">\(u_{N,j}\)</span> have been set to zero. To implement the second, we make use of the above interpretation to write and solve the equations,</p>
 <div class="math notranslate nohighlight">
 \[\begin{aligned}
     D_2 L^{i-1,0}_d + D_1 L^{i,0}_d + \Delta s p_t^{i,0} = 0, \quad i = 1,\dots,N-1
