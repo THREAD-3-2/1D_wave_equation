@@ -1,10 +1,10 @@
 .. _introduction:
 
 ==============
- Introduction
+ Example
 ==============
 
-Description of the problem
+Problem description
 ==========================
 
 The transverse deformation :math:`u = u(x,t)` of the string is a function
