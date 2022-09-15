@@ -13,7 +13,7 @@ Contents
 ========
 
 .. toctree::
-   example
+   introduction
    discretisation
    results
    matlab
