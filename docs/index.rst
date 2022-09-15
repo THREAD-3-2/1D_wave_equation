@@ -1,5 +1,5 @@
 ========================================
- Documentation of `1D wave equation`
+ `1D wave equation`  Documentation
 ========================================
 
 `1D_wave_equation <https://github.com/THREAD-3-2/1D_wave_equation>`_
@@ -13,7 +13,7 @@ Contents
 ========
 
 .. toctree::
-   introduction
+   example
    discretisation
    results
    matlab
