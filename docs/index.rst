@@ -13,6 +13,7 @@ Contents
 ========
 
 .. toctree::
+   installation
    introduction
    discretisation
    results
